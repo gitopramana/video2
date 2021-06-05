@@ -46,9 +46,13 @@ text-decoration: none;
                 <td>{{ $mhs->nbi }}</td>
                 <td>{{ $mhs->nama_mhs }}</td>
                 <td>
-                    <a href="#">Edit</a>
+                    <a href="{{ url('mahasiswa/' . $mhs->id . "/edit") }}">Edit</a>
                     |
-                    <a href="#">Hapus</a>
+                    <form action="{{ url('mahasiswa/' . $mhs->id)}}" method="post">
+                    @csrf
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit">Delete</button>
+                    </form>
                 </td>
             </tr>
 

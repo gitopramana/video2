@@ -25,7 +25,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('mahasiswa_tambah');
     }
 
     /**
@@ -36,7 +36,11 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Mahasiswa::create([
+            'nbi' => $request->nbi,
+            'nama_mhs' => $request->nama_mhs,
+        ]);
+        return redirect('mahasiswa');
     }
 
     /**
@@ -58,7 +62,8 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mahasiswa = Mahasiswa::find($id);
+        return view('mahasiswa_edit', ['mahasiswa' => $mahasiswa]);
     }
 
     /**
@@ -70,7 +75,12 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa->nbi = $request->nbi;
+        $mahasiswa->nama_mhs = $request->nama_mhs;
+        $mahasiswa->save();
+
+        return redirect('mahasiswa');
     }
 
     /**
@@ -81,6 +91,9 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa->delete();
+
+        return redirect('mahasiswa');
     }
 }
